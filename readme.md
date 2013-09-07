@@ -23,7 +23,7 @@ Win-pip will add the pip module if it’s not already there.
 
 To add boto, type: pip install boto, then click Run.
 
-<img src="win-pip.png" alt="win-pip"  width="235"> 
+<img src="win-pip.png" alt="win-pip"  width="320"> 
 
 
 
