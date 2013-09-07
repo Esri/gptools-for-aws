@@ -63,7 +63,7 @@ you will find it under Key Pairs
 
 <br>
 
-That's all you need to start running hadoop jobs in AWS using EMR!
+That's all you need to start running hadoop jobs in AWS using EMR from ArcGIS Desktop!
 
 <br>
 
