@@ -8,7 +8,9 @@
 The following steps describe the setup and configuration needed. It only needs to be done once, and then you’re ready to use the GIS Hadoop on EMR GP Tools anytime you want.
 
 
-1. Installing boto
+<h3>
+<a name="installboto" class="anchor" href="#installboto"/>
+1. Installing boto</h3>
 
 boto is the python package that is used to communicate with Amazon Web Services. It should be added first before the GP tools are used. This can easily be done using:
 > pip install boto
