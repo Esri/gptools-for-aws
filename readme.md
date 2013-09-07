@@ -28,8 +28,9 @@ To add boto, type: pip install boto, then click Run.
 <img src="win-pip.png" alt="win-pip"  width="320"> 
 
 
-
-2. Adding the GIS Hadoop on EMR GP Tools
+<h3>
+<a name="gptoolssetup" class="anchor" href="#gptoolssetup"/>
+2. Adding the GP Tools For AWS</h3>
 
 Download the zip file, and unzip it under a location on your disk. Add this folder as a new folder connection in your Catalog from ArcGIS Desktop. 
 
@@ -38,7 +39,10 @@ That’s it!
 You’re now ready to use the GIS Hadoop on EMR GP Tools.
 
 
+<h3>
+<a name="gptoolsconfig" class="anchor" href="#gptoolsconfig"/>
 3. Getting your Credentials ready to access your AWS account
+</h3>
 
 You will need to get the following parameters from your AWS account ready before using the tools.
 
@@ -66,6 +70,7 @@ This can be done using PuttyGen and Putty.
 http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-connect-to-instance-linux.html#using-putty
 
 
+That's all you need to start running hadoop jobs in AWS using EMR!
 
 
 <h2>
