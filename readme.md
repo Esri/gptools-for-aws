@@ -1,5 +1,5 @@
 <h1>
-<a name="gp-tools-for-emr" class="anchor" href="#gis-tools-for-hadoop"><span class="octicon octicon-link"></span></a>gp-tools-for-emr</h1>
+<a name="gp-tools-for-aws" class="anchor" href="#gp-tools-for-aws"><span class="octicon octicon-link"></span></a>gp-tools-for-aws</h1>
 
 
 <h2>
@@ -23,7 +23,7 @@ Win-pip will add the pip module if it’s not already there.
 
 To add boto, type: pip install boto, then click Run.
 
- 
+ img src="win-pip.png" alt="win-pip" height="42" width="42"> 
 
 
 
