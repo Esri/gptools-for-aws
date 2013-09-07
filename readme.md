@@ -61,8 +61,16 @@ You can get a key-pair created and downloaded through the following steps:
 http://docs.aws.amazon.com/general/latest/gr/getting-aws-sec-creds.html
 you will find it under Key Pairs
 
+<br>
 
-4. How to access your instances from windows using SSH
+That's all you need to start running hadoop jobs in AWS using EMR!
+
+<br>
+
+<h3>
+<a name="ssh" class="anchor" href="#ssh"/>
+4. How to access your instances from windows using SSH (Optional)
+</h3>
 
 In case you need to access your cluster, you can SSH to the master node of the cluster using the following steps.
 This can be done using PuttyGen and Putty.
@@ -70,7 +78,7 @@ This can be done using PuttyGen and Putty.
 http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-connect-to-instance-linux.html#using-putty
 
 
-That's all you need to start running hadoop jobs in AWS using EMR!
+
 
 
 <h2>
