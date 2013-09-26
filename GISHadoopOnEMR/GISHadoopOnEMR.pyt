@@ -73,7 +73,8 @@ class EMRSetup(object):
             parameterType="Required",
             direction="Input")
 
-        param3.value = ""
+        param3.filter.type = "ValueList"
+        param3.filter.list = ["us-east-1", "us-west-1", "us-west-2", "eu-west-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "sa-east-1"]
 
         # Fifth parameter
         param4 = arcpy.Parameter(
@@ -175,12 +176,12 @@ class EMRSetup(object):
         arcpy.AddMessage("Connecting to AWS %s" % region )
         conn = connect_to_region(region, aws_access_key_id= awskey , aws_secret_access_key= awssecretkey)
         jobid = conn.run_jobflow(name = jname,ami_version='latest',enable_debugging=True,log_uri=loguri,keep_alive=True,ec2_keyname= ec2keyname, master_instance_type = machinesize, slave_instance_type= machinesize,num_instances=clustersize , bootstrap_actions=[bootstrap] , steps=[InstallHiveStep()])
-
+        conn.set_termination_protection(jobid, True)
 
         status = conn.describe_jobflow(jobid)
         parameters[8].value=status.jobflowid
         arcpy.AddMessage("New Job Flow ID: %s" % status.jobflowid)
-        #arcpy.AddMessage(type(status))
+
         while True:
             status = conn.describe_jobflow(jobid)
             arcpy.AddMessage("Status: {}".format(status.state))
@@ -188,6 +189,8 @@ class EMRSetup(object):
                 arcpy.AddMessage("Ready to use!")
                 parameters[9].value= status.masterpublicdnsname
                 arcpy.AddMessage("DNS name to access master node is: {}".format(status.masterpublicdnsname))
+                break
+            if status.state == 'FAILED':
                 break
        	    sleep(30)
 
@@ -245,7 +248,8 @@ class EMRStatus(object):
             parameterType="Required",
             direction="Input")
 
-        param3.value = ""
+        param3.filter.type = "ValueList"
+        param3.filter.list = ["us-east-1", "us-west-1", "us-west-2", "eu-west-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "sa-east-1"]
 
 
         # Fifth parameter
@@ -340,7 +344,8 @@ class EMRTerminate(object):
             parameterType="Required",
             direction="Input")
 
-        param3.value = ""
+        param3.filter.type = "ValueList"
+        param3.filter.list = ["us-east-1", "us-west-1", "us-west-2", "eu-west-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "sa-east-1"]
 
 
         # Fifth parameter
@@ -381,6 +386,7 @@ class EMRTerminate(object):
 
         conn = connect_to_region(region, aws_access_key_id= awskey , aws_secret_access_key= awssecretkey)
         status = conn.describe_jobflow(jobid)
+        conn.set_termination_protection(jobid, False)
 
         if status.state != 'TERMINATED':
             arcpy.AddMessage("Terminating EMR Cluster...")
@@ -719,7 +725,8 @@ class RunHiveQuery(object):
             parameterType="Required",
             direction="Input")
 
-        param3.value = ""
+        param3.filter.type = "ValueList"
+        param3.filter.list = ["us-east-1", "us-west-1", "us-west-2", "eu-west-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "sa-east-1"]
 
        # Fifth parameter
         param4 = arcpy.Parameter(
@@ -772,9 +779,7 @@ class RunHiveQuery(object):
         conn = connect_to_region(region, aws_access_key_id=awskey, aws_secret_access_key=awssecretkey)
 
         steps=[
-        ScriptRunnerStep(name='Copy Hive Script', step_args=['s3://tobinbak-test/bootstrap-actions/copy-s3-to-local',
-            '-s', s3_input_path, '-d', "/home/hadoop/hive-emr-commands.hql"]),
-        HiveStep('Hive Sample', "/home/hadoop/hive-emr-commands.hql", hive_args=['-d', "OUTPUT=%s" % s3_output_path])]
+        HiveStep('Hive Sample', s3_input_path, hive_args=['-d', "OUTPUT=%s" % s3_output_path])]
 
         response = conn.add_jobflow_steps(jobid, steps)
 
@@ -784,7 +789,9 @@ class RunHiveQuery(object):
             if status.state == 'WAITING':
                 arcpy.AddMessage("Query completed, results are now available in the output location!")
                 break
-
+            if status.state == 'FAILED' or status.state == 'SHUTTING_DOWN':
+                arcpy.AddMessage("Query failed, Cluster is shutting down!")
+                break
 
 
         return
