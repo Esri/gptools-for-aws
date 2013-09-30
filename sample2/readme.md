@@ -1,8 +1,8 @@
 
 
-# GP tools for AWS Sample 1
+# GP tools for AWS Sample 2
 
-This is the same hive sample included in [GIS Tools for Hadoop](https://github.com/Esri/gis-tools-for-hadoop/tree/master/samples), but the script has beem modified with minor changes to work on AWS EMR.
+This is the same hive sample included in [GIS Tools for Hadoop](https://github.com/Esri/gis-tools-for-hadoop/tree/master/samples/point-in-polygon-aggregation-hive), but the script has beem modified with minor changes to work on AWS EMR.
 
 
 ## Requirements
