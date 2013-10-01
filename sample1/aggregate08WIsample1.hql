@@ -48,7 +48,7 @@ Select ObjectID, TileRow, TileColumn, TileCount,
 from HeatMapTemp2 
 where TileRow <= 8591 and TileRow >= 0 and TileColumn <= 8191 and TileColumn >= 0;
 
-
+DROP TABLE heatmapfinalout;
 CREATE external TABLE heatmapfinalout (ObjectID int, TileRow int, TileColumn int, TileCount int, longitude Double, latitude Double)
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE LOCATION '${OUTPUT}';
 
