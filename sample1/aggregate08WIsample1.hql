@@ -6,7 +6,7 @@ create temporary function ST_Point as 'com.esri.hadoop.hive.ST_Point';
 DROP TABLE wimg08;
 CREATE EXTERNAL TABLE wimg08(RequestID INT, Date STRING, Time STRING, IP STRING, Protocol INT, Method INT, Scale INT, TileRow INT, TileColumn INT, URI STRING, Status INT, Bytes INT, TimeTaken INT, Referer STRING, UserAgent STRING, Cookie STRING, DateNumber INT) 
 PARTITIONED BY (dt string)
-ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE LOCATION 's3://marwa.gishadoop.com/sample/data/sample2';
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE LOCATION 's3://< S3 path to your data directory here >';
 
 alter table wimg08 recover partitions;
 
